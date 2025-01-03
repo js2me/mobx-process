@@ -18,9 +18,13 @@ export class ProcessModelImpl implements ProcessModel {
   protected abortController: AbortController;
   protected processes: ProcessStore;
 
-  childProcesses: Class<ProcessModel>[];
-  isBlocking: boolean = true;
-  status = ProcessStatus.Initialized;
+  private _childProcesses: Class<ProcessModel>[];
+  private _isBlocking: boolean = true;
+  private _status = ProcessStatus.Initialized;
+
+  childProcesses!: Class<ProcessModel>[];
+  isBlocking!: boolean;
+  status!: ProcessStatus;
 
   id =
     process.env.NODE_ENV === 'production'
@@ -29,12 +33,12 @@ export class ProcessModelImpl implements ProcessModel {
 
   constructor({ processes, abortSignal, childProcesses }: ProcessModelConfig) {
     this.processes = processes;
-    this.childProcesses = childProcesses ?? [];
+    this._childProcesses = childProcesses ?? [];
     this.abortController = new LinkedAbortController(abortSignal);
 
-    observable.ref(this, 'status');
-    observable.ref(this, 'childProcesses');
-    observable.ref(this, 'isBlocking');
+    observable.ref(this, '_status');
+    observable.ref(this, '_childProcesses');
+    observable.ref(this, '_isBlocking');
     computed(this, 'isWorking');
     action.bound(this, 'init');
     action.bound(this, 'restart');
@@ -42,6 +46,21 @@ export class ProcessModelImpl implements ProcessModel {
     action.bound(this, 'stop');
 
     makeObservable(this);
+
+    Object.defineProperty(this, 'childProcesses', {
+      get: () => this._childProcesses,
+      set: (value) => (this._childProcesses = value),
+    });
+
+    Object.defineProperty(this, 'isBlocking', {
+      get: () => this._isBlocking,
+      set: (value) => (this._isBlocking = value),
+    });
+
+    Object.defineProperty(this, 'status', {
+      get: () => this._status,
+      set: (value) => (this._status = value),
+    });
 
     this.init();
   }
