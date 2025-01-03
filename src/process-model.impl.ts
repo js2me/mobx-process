@@ -18,7 +18,7 @@ export class ProcessModelImpl implements ProcessModel {
   protected abortController: AbortController;
   protected processes: ProcessStore;
 
-  childProcesses?: Class<ProcessModel>[] = undefined;
+  childProcesses: Class<ProcessModel>[];
   isBlocking: boolean = true;
   status = ProcessStatus.Initialized;
 
@@ -27,8 +27,9 @@ export class ProcessModelImpl implements ProcessModel {
       ? `p_${globalThis.crypto.randomUUID()}`
       : `${(this as any).constructor.name}_p_${globalThis.crypto.randomUUID()}`;
 
-  constructor({ processes, abortSignal }: ProcessModelConfig) {
+  constructor({ processes, abortSignal, childProcesses }: ProcessModelConfig) {
     this.processes = processes;
+    this.childProcesses = childProcesses ?? [];
     this.abortController = new LinkedAbortController(abortSignal);
 
     observable.ref(this, 'status');
@@ -45,10 +46,9 @@ export class ProcessModelImpl implements ProcessModel {
   get isWorking() {
     return (
       this.status === ProcessStatus.Working &&
-      (!this.childProcesses ||
-        this.childProcesses.every(
-          (childProcess) => this.processes.get(childProcess)?.isWorking,
-        ))
+      this.childProcesses.every(
+        (childProcess) => this.processes.get(childProcess)?.isWorking,
+      )
     );
   }
 
