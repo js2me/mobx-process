@@ -20,13 +20,12 @@ export class ProcessModelImpl implements ProcessModel {
 
   childProcesses: Class<ProcessModel>[] = [];
   isBlocking: boolean = true;
+  status = ProcessStatus.Initialized;
 
   id =
     process.env.NODE_ENV === 'production'
       ? `p_${globalThis.crypto.randomUUID()}`
       : `${(this as any).constructor.name}_p_${globalThis.crypto.randomUUID()}`;
-
-  accessor status = ProcessStatus.Initialized;
 
   constructor({ processes, abortSignal }: ProcessModelConfig) {
     this.processes = processes;
