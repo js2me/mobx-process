@@ -14,7 +14,7 @@ import { ProcessConfig, ProcessStatus } from './process.types';
 
 declare const process: { env: { NODE_ENV?: string } };
 
-export class ProcessModelImpl implements Process {
+export class ProcessImpl implements Process {
   protected abortController: AbortController;
   protected processes: ProcessStore;
 

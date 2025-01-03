@@ -15,4 +15,5 @@ nginx.conf
 jsconfig.json
 *.json
 .eslintrc.cjs
+coverage
 post-build.mjs
