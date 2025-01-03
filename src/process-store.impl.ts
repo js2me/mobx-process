@@ -2,14 +2,12 @@ import { action, computed, makeObservable, observable } from 'mobx';
 import { Class, Maybe } from 'yummies/utils/types';
 
 import { ProcessModel } from './process-model';
-import { ProcessModelImpl } from './process-model.impl';
 import { ProcessStore } from './process-store';
 
 export class ProcessStoreImpl implements ProcessStore {
-  protected processes = observable.map<Class<ProcessModel>, ProcessModelImpl>(
-    [],
-    { deep: false },
-  );
+  protected processes = observable.map<Class<ProcessModel>, ProcessModel>([], {
+    deep: false,
+  });
 
   constructor() {
     computed(this, 'currentProcesses');
@@ -34,10 +32,7 @@ export class ProcessStoreImpl implements ProcessStore {
     return (this.processes.get(Process) as Maybe<T>) ?? null;
   }
 
-  protected setProcess(
-    process: Class<ProcessModel>,
-    instance: ProcessModelImpl,
-  ) {
+  protected setProcess(process: Class<ProcessModel>, instance: ProcessModel) {
     this.processes.set(process, instance);
   }
 
@@ -49,10 +44,10 @@ export class ProcessStoreImpl implements ProcessStore {
     return this.getProcess(Process);
   }
 
-  protected createProcess(Process: Class<ProcessModel>) {
+  protected createProcess(Process: Class<ProcessModel>): ProcessModel {
     return new Process({
       processes: this,
-    }) as ProcessModelImpl;
+    });
   }
 
   async load(
