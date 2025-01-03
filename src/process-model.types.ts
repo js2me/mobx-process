@@ -1,6 +1,6 @@
 import { ProcessStore } from './process-store';
 
-export const enum ProcessStatus {
+export enum ProcessStatus {
   Initialized,
   Starting,
   Working,
