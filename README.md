@@ -16,7 +16,7 @@
 
 _**MobX** code blocks working by start\stop mechanism_  
 
-Main goal which these "processes" are needed is the executing some business logic across whole application. Naming "process" was borrowed from FSD architectural methodology. More about this idea of this process implementation you can read [here](https://feature-sliced.design/docs/get-started/overview#layers)
+Main goal which these "processes" are needed is the executing some business logic across whole application. Naming "process" was borrowed from [FSD architectural methodology](https://feature-sliced.design/docs/get-started/overview#layers). More about this idea of this process implementation you can read [here](https://feature-sliced.design/docs/reference/layers#processes)
 
 # Usage  
 
