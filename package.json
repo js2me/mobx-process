@@ -1,0 +1,44 @@
+{
+  "name": "mobx-process",
+  "version": "0.0.1",
+  "scripts": {
+    "clean": "rimraf dist",
+    "check": "eslint . --fix",
+    "prebuild": "npm run clean && npm run check",
+    "build": "tsc && node ./post-build.mjs",
+    "pub": "PUBLISH=true pnpm run build",
+    "pub:patch": "PUBLISH=true PUBLISH_VERSION=patch pnpm run build",
+    "pub:minor": "PUBLISH=true PUBLISH_VERSION=minor pnpm run build",
+    "pub:major": "PUBLISH=true PUBLISH_VERSION=major pnpm run build"
+  },
+  "keywords": [
+    "mobx"
+  ],
+  "author": "js2me",
+  "license": "MIT",
+  "description": "MobX code blocks working by start\\stop mechanism",
+  "bugs": {
+    "url": "https://github.com/js2me/mobx-process/issues"
+  },
+  "homepage": "https://github.com/js2me/mobx-process",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/js2me/mobx-process"
+  },
+  "dependencies": {
+    "linked-abort-controller": "^1.0.4",
+    "yummies": "^3.0.1"
+  },
+  "peerDependencies": {
+    "mobx": "^6.12.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.11",
+    "eslint": "^8.57.1",
+    "js2me-eslint-config": "^1.0.7",
+    "js2me-exports-post-build-script": "^2.0.17",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.2"
+  },
+  "packageManager": "pnpm@9.5.0+sha512.140036830124618d624a2187b50d04289d5a087f326c9edfc0ccd733d76c4f52c3a313d4fc148794a2a9d81553016004e6742e8cf850670268a7387fc220c903"
+}
