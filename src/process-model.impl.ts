@@ -18,7 +18,7 @@ export class ProcessModelImpl implements ProcessModel {
   protected abortController: AbortController;
   protected processes: ProcessStore;
 
-  childProcesses: Class<ProcessModel>[] = [];
+  childProcesses?: Class<ProcessModel>[] = undefined;
   isBlocking: boolean = true;
   status = ProcessStatus.Initialized;
 
@@ -45,9 +45,10 @@ export class ProcessModelImpl implements ProcessModel {
   get isWorking() {
     return (
       this.status === ProcessStatus.Working &&
-      this.childProcesses.every(
-        (childProcess) => this.processes.get(childProcess)?.isWorking,
-      )
+      (!this.childProcesses ||
+        this.childProcesses.every(
+          (childProcess) => this.processes.get(childProcess)?.isWorking,
+        ))
     );
   }
 
