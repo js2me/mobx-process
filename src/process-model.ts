@@ -23,6 +23,11 @@ export interface ProcessModel {
   readonly isWorking: boolean;
 
   /**
+   * Calls when instance of the ProcessModel is created
+   */
+  init(): void;
+
+  /**
    * Starts the process and all nested processes described in {childProcesses}
    */
   start?(): Promise<void>;

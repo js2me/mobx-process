@@ -36,11 +36,14 @@ export class ProcessModelImpl implements ProcessModel {
     observable.ref(this, 'childProcesses');
     observable.ref(this, 'isBlocking');
     computed(this, 'isWorking');
+    action.bound(this, 'init');
     action.bound(this, 'restart');
     action.bound(this, 'start');
     action.bound(this, 'stop');
 
     makeObservable(this);
+
+    this.init();
   }
 
   get isWorking() {
@@ -50,6 +53,10 @@ export class ProcessModelImpl implements ProcessModel {
         (childProcess) => this.processes.get(childProcess)?.isWorking,
       )
     );
+  }
+
+  init(): void {
+    // needs to override
   }
 
   async restart() {
