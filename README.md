@@ -15,4 +15,44 @@
 [bundlephobia-image]: https://badgen.net/bundlephobia/minzip/mobx-process
 
 _**MobX** code blocks working by start\stop mechanism_  
-  
+
+Main goal which these "processes" are needed is the executing some business logic across whole application. Naming "process" was borrowed from FSD architectural methodology. More about this idea of this process implementation you can read [here](https://feature-sliced.design/docs/get-started/overview#layers)
+
+# Usage  
+
+### 1. Create instance of the [`ProcessStore`](src/process-store.ts)   
+
+You can create your own implementation or use [ready from package](src/process-store.impl.ts).   
+
+```ts
+import { ProcessStoreImpl } from "mobx-process";
+
+const processStore = new ProcessStoreImpl();
+```
+
+### 2. Create implementation of the [`Process`](src/process.ts)  
+
+Or you can use [ready from package](src/process.impl.ts).   
+
+```ts
+import { Process, ProcessImpl } from "mobx-process";
+
+export class MyProcess extends ProcessImpl implements Process {
+  childProcesses = [];
+
+  async start() {
+    // do some logic
+    await super.start();
+  }
+
+  async stop() {
+    await super.stop();
+  }
+}
+```
+
+### 3. Load process into store   
+
+```ts
+await processStore.load(MyProcess)
+```

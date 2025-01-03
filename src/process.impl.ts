@@ -8,21 +8,21 @@ import {
 } from 'mobx';
 import { Class } from 'yummies/utils/types';
 
-import { ProcessModel } from './process-model';
-import { ProcessModelConfig, ProcessStatus } from './process-model.types';
+import { Process } from './process';
 import { ProcessStore } from './process-store';
+import { ProcessConfig, ProcessStatus } from './process.types';
 
 declare const process: { env: { NODE_ENV?: string } };
 
-export class ProcessModelImpl implements ProcessModel {
+export class ProcessModelImpl implements Process {
   protected abortController: AbortController;
   protected processes: ProcessStore;
 
-  private _childProcesses: Class<ProcessModel>[];
+  private _childProcesses: Class<Process>[];
   private _isBlocking: boolean = true;
   private _status = ProcessStatus.Initialized;
 
-  childProcesses!: Class<ProcessModel>[];
+  childProcesses!: Class<Process>[];
   isBlocking!: boolean;
   status!: ProcessStatus;
 
@@ -31,7 +31,7 @@ export class ProcessModelImpl implements ProcessModel {
       ? `p_${globalThis.crypto.randomUUID()}`
       : `${(this as any).constructor.name}_p_${globalThis.crypto.randomUUID()}`;
 
-  constructor({ processes, abortSignal, childProcesses }: ProcessModelConfig) {
+  constructor({ processes, abortSignal, childProcesses }: ProcessConfig) {
     this.processes = processes;
     this._childProcesses = childProcesses ?? [];
     this.abortController = new LinkedAbortController(abortSignal);

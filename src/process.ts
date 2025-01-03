@@ -1,8 +1,8 @@
 import { Class } from 'yummies/utils/types';
 
-import { ProcessStatus } from './process-model.types';
+import { ProcessStatus } from './process.types';
 
-export interface ProcessModel {
+export interface Process {
   readonly status: ProcessStatus;
 
   /**
@@ -45,5 +45,5 @@ export interface ProcessModel {
   /**
    * Child processes that should be automatically started with the process (Based on the library implementation)
    */
-  childProcesses?: Class<ProcessModel>[];
+  childProcesses?: Class<Process>[];
 }

@@ -1,8 +1,8 @@
 import { Class } from 'yummies/utils/types';
 
-import { ProcessModel } from './process-model';
+import { Process } from './process';
 
 export type ProcessLoadPayload =
-  | Class<ProcessModel>
-  | Class<ProcessModel>[]
-  | readonly Class<ProcessModel>[];
+  | Class<Process>
+  | Class<Process>[]
+  | readonly Class<Process>[];

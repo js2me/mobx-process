@@ -1,11 +1,11 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { Class, Maybe } from 'yummies/utils/types';
 
-import { ProcessModel } from './process-model';
+import { Process } from './process';
 import { ProcessStore } from './process-store';
 
 export class ProcessStoreImpl implements ProcessStore {
-  protected processes = observable.map<Class<ProcessModel>, ProcessModel>([], {
+  protected processes = observable.map<Class<Process>, Process>([], {
     deep: false,
   });
 
@@ -28,31 +28,29 @@ export class ProcessStoreImpl implements ProcessStore {
     });
   }
 
-  protected getProcess<T extends ProcessModel>(Process: Class<T>): T | null {
+  protected getProcess<T extends Process>(Process: Class<T>): T | null {
     return (this.processes.get(Process) as Maybe<T>) ?? null;
   }
 
-  protected setProcess(process: Class<ProcessModel>, instance: ProcessModel) {
+  protected setProcess(process: Class<Process>, instance: Process) {
     this.processes.set(process, instance);
   }
 
-  protected deleteProcess(process: Class<ProcessModel>) {
+  protected deleteProcess(process: Class<Process>) {
     this.processes.delete(process);
   }
 
-  get<T extends ProcessModel>(Process: Class<T>): T | null {
+  get<T extends Process>(Process: Class<T>): T | null {
     return this.getProcess(Process);
   }
 
-  protected createProcess(Process: Class<ProcessModel>): ProcessModel {
+  protected createProcess(Process: Class<Process>): Process {
     return new Process({
       processes: this,
     });
   }
 
-  async load(
-    payload: Class<ProcessModel> | Class<ProcessModel>[],
-  ): Promise<void> {
+  async load(payload: Class<Process> | Class<Process>[]): Promise<void> {
     const processes = Array.isArray(payload) ? payload : [payload];
 
     await Promise.all(
@@ -65,9 +63,7 @@ export class ProcessStoreImpl implements ProcessStore {
     );
   }
 
-  async unload(
-    payload: Class<ProcessModel> | Class<ProcessModel>[],
-  ): Promise<void> {
+  async unload(payload: Class<Process> | Class<Process>[]): Promise<void> {
     const processes = Array.isArray(payload) ? payload : [payload];
 
     await Promise.all(
@@ -78,9 +74,7 @@ export class ProcessStoreImpl implements ProcessStore {
     );
   }
 
-  async reload(
-    payload: Class<ProcessModel> | Class<ProcessModel>[],
-  ): Promise<void> {
+  async reload(payload: Class<Process> | Class<Process>[]): Promise<void> {
     const processes = Array.isArray(payload) ? payload : [payload];
 
     await Promise.all(

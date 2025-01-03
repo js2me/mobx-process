@@ -1,6 +1,6 @@
 import { Class } from 'yummies/utils/types';
 
-import { ProcessModel } from './process-model';
+import { Process } from './process';
 import { ProcessLoadPayload } from './process-store.types';
 
 export interface ProcessStore {
@@ -9,7 +9,7 @@ export interface ProcessStore {
    */
   readonly hasBlockingProcesses: boolean;
 
-  currentProcesses: ProcessModel[];
+  currentProcesses: Process[];
 
   /**
    * Loads and starts the process
@@ -29,5 +29,5 @@ export interface ProcessStore {
   /**
    * Returns the last instance of the process
    */
-  get<T extends ProcessModel>(Constructor: Class<T>): T | null;
+  get<T extends Process>(Constructor: Class<T>): T | null;
 }
