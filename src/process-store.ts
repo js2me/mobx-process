@@ -1,7 +1,5 @@
-import { Class } from 'yummies/utils/types';
-
 import { Process } from './process';
-import { ProcessLoadPayload } from './process-store.types';
+import { ProcessGetPayload, ProcessLoadPayload } from './process-store.types';
 
 export interface ProcessStore {
   /**
@@ -29,5 +27,5 @@ export interface ProcessStore {
   /**
    * Returns the last instance of the process
    */
-  get<T extends Process>(Constructor: Class<T>): T | null;
+  get<T extends Process>(lookup: ProcessGetPayload<T>): T | null;
 }
