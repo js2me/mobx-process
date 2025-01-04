@@ -1,6 +1,6 @@
 {
   "name": "mobx-process",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "scripts": {
     "clean": "rimraf dist",
     "check": "eslint . --fix",
