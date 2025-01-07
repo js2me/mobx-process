@@ -15,7 +15,10 @@ import { ProcessConfig, ProcessStatus } from './process.types';
 declare const process: { env: { NODE_ENV?: string } };
 
 export class ProcessImpl implements Process {
-  protected abortController: AbortController;
+  private abortController: AbortController;
+
+  protected stopSignal: AbortSignal;
+
   protected processes: ProcessStore;
 
   private _childProcesses: Class<Process>[];
@@ -35,6 +38,7 @@ export class ProcessImpl implements Process {
     this.processes = processes;
     this._childProcesses = childProcesses ?? [];
     this.abortController = new LinkedAbortController(abortSignal);
+    this.stopSignal = this.abortController.signal;
 
     observable.ref(this, '_status');
     observable.ref(this, '_childProcesses');

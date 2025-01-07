@@ -3,6 +3,7 @@ import { Class, Maybe } from 'yummies/utils/types';
 
 import { Process } from './process';
 import { ProcessStore } from './process-store';
+import { ProcessGetPayload } from './process-store.types';
 
 export class ProcessStoreImpl implements ProcessStore {
   protected processes = observable.map<Class<Process>, Process>([], {
@@ -28,8 +29,14 @@ export class ProcessStoreImpl implements ProcessStore {
     });
   }
 
-  protected getProcess<T extends Process>(Process: Class<T>): T | null {
-    return (this.processes.get(Process) as Maybe<T>) ?? null;
+  protected getProcess<T extends Process>(
+    lookup: ProcessGetPayload<T>,
+  ): T | null {
+    if (typeof lookup === 'string') {
+      return (this.currentProcesses.find((process) => process.id === lookup) ??
+        null) as T;
+    }
+    return (this.processes.get(lookup) as Maybe<T>) ?? null;
   }
 
   protected setProcess(process: Class<Process>, instance: Process) {
@@ -40,8 +47,8 @@ export class ProcessStoreImpl implements ProcessStore {
     this.processes.delete(process);
   }
 
-  get<T extends Process>(Process: Class<T>): T | null {
-    return this.getProcess(Process);
+  get<T extends Process>(lookup: ProcessGetPayload<T>): T | null {
+    return this.getProcess(lookup);
   }
 
   protected createProcess(Process: Class<Process>): Process {

@@ -6,3 +6,5 @@ export type ProcessLoadPayload =
   | Class<Process>
   | Class<Process>[]
   | readonly Class<Process>[];
+
+export type ProcessGetPayload<T extends Process> = string | Class<T>;
