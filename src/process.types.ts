@@ -1,7 +1,7 @@
 import { Class } from 'yummies/utils/types';
 
-import { Process } from './process';
-import { ProcessStore } from './process-store';
+import { ProcessStore } from './process-store.js';
+import { Process } from './process.js';
 
 export enum ProcessStatus {
   Initialized,

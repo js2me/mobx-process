@@ -1,5 +1,8 @@
-import { Process } from './process';
-import { ProcessGetPayload, ProcessLoadPayload } from './process-store.types';
+import {
+  ProcessGetPayload,
+  ProcessLoadPayload,
+} from './process-store.types.js';
+import { Process } from './process.js';
 
 export interface ProcessStore {
   /**

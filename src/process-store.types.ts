@@ -1,6 +1,6 @@
 import { Class } from 'yummies/utils/types';
 
-import { Process } from './process';
+import { Process } from './process.js';
 
 export type ProcessLoadPayload =
   | Class<Process>

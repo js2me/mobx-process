@@ -1,6 +1,6 @@
 import { Class } from 'yummies/utils/types';
 
-import { ProcessStatus } from './process.types';
+import { ProcessStatus } from './process.types.js';
 
 export interface Process {
   readonly status: ProcessStatus;

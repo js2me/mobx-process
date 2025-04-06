@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { waitAsync } from 'yummies/async';
+import { sleep } from 'yummies/async';
 import { Class } from 'yummies/utils/types';
 
-import { Process } from './process';
-import { ProcessStoreImpl } from './process-store.impl';
+import { ProcessStoreImpl } from './process-store.impl.js';
+import { Process } from './process.js';
 import { ProcessMock } from './process.test';
 
 export class ProcessStoreMock extends ProcessStoreImpl {}
@@ -90,7 +90,7 @@ describe('ProcessStore', () => {
     }
     class Cp2 extends ProcessMock {
       async start() {
-        await waitAsync(100);
+        await sleep(100);
         await super.start();
         startedIds.push('cp2');
       }
@@ -127,7 +127,7 @@ describe('ProcessStore', () => {
     }
     class Cp2 extends ProcessMock {
       async stop() {
-        await waitAsync(100);
+        await sleep(100);
         await super.stop();
         stoppedIds.push('cp2');
       }

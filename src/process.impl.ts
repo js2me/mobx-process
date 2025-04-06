@@ -8,9 +8,9 @@ import {
 } from 'mobx';
 import { Class } from 'yummies/utils/types';
 
-import { Process } from './process';
-import { ProcessStore } from './process-store';
-import { ProcessConfig, ProcessStatus } from './process.types';
+import { ProcessStore } from './process-store.js';
+import { Process } from './process.js';
+import { ProcessConfig, ProcessStatus } from './process.types.js';
 
 declare const process: { env: { NODE_ENV?: string } };
 

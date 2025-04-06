@@ -1,9 +1,9 @@
 import { action, computed, makeObservable, observable } from 'mobx';
 import { Class, Maybe } from 'yummies/utils/types';
 
-import { Process } from './process';
-import { ProcessStore } from './process-store';
-import { ProcessGetPayload } from './process-store.types';
+import { ProcessStore } from './process-store.js';
+import { ProcessGetPayload } from './process-store.types.js';
+import { Process } from './process.js';
 
 export class ProcessStoreImpl implements ProcessStore {
   protected processes = observable.map<Class<Process>, Process>([], {

@@ -20,6 +20,7 @@
   ],
   "author": "js2me",
   "license": "MIT",
+  "type": "module",
   "description": "MobX code blocks working by start\\stop mechanism",
   "bugs": {
     "url": "https://github.com/js2me/mobx-process/issues"
@@ -30,22 +31,22 @@
     "url": "git://github.com/js2me/mobx-process"
   },
   "dependencies": {
-    "linked-abort-controller": "^1.0.4",
-    "yummies": "^3.0.1"
+    "linked-abort-controller": "^1.1.0",
+    "yummies": "^3.0.39"
   },
   "peerDependencies": {
     "mobx": "^6.12.4"
   },
   "devDependencies": {
-    "@types/node": "^20.17.11",
-    "@vitest/coverage-istanbul": "^2.1.8",
+    "@types/node": "^20.17.30",
+    "@vitest/coverage-istanbul": "^2.1.9",
     "eslint": "^8.57.1",
     "js2me-eslint-config": "^1.0.7",
-    "js2me-exports-post-build-script": "^2.0.17",
+    "js2me-exports-post-build-script": "^2.0.18",
     "jsdom": "^25.0.1",
     "rimraf": "^6.0.1",
-    "typescript": "^5.7.2",
-    "vitest": "^2.1.8"
+    "typescript": "^5.8.3",
+    "vitest": "^2.1.9"
   },
   "packageManager": "pnpm@9.5.0+sha512.140036830124618d624a2187b50d04289d5a087f326c9edfc0ccd733d76c4f52c3a313d4fc148794a2a9d81553016004e6742e8cf850670268a7387fc220c903"
 }

@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { ProcessImpl } from './process.impl';
-import { ProcessConfig } from './process.types';
+import { ProcessImpl } from './process.impl.js';
+import { ProcessConfig } from './process.types.js';
 
 export class ProcessMock extends ProcessImpl {
   spies = {
